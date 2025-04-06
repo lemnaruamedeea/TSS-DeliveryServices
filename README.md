@@ -74,13 +74,3 @@ Estimează timpul de livrare (în ore):
 - Timpul minim: **1 oră**
 
 ---
-
-## 🧪 Testare unitară
-Clasele sunt concepute pentru a fi ușor de testat cu JUnit. Exemple de aspecte ce pot fi testate:
-
-- Clase de echivalență și valori de frontieră pentru greutate/distanță
-- Acoperire structurală: decizii, condiții, bucle
-- Teste funcționale pentru clasificare, eligibilitate și estimare timp
-- Analiza cu tool-uri de mutație (ex: PIT)
-
----
