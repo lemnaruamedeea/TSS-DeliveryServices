@@ -1,35 +1,86 @@
-# TSS-DeliveryServices
+# 🚚 TSS-DeliveryServices
 
-## Clasa Livrare
+TSS-DeliveryServices este o aplicație Java care modelează un sistem de livrări, incluzând logica de calcul pentru costuri, timp de livrare și clasificare, pe baza unor reguli predefinite. Proiectul este structurat în două clase principale: `Livrare` și `ServiciuLivrare`.
 
-Clasa Livrare reprezintă o livrare pe care o trimitem printr-un serviciu de transport, având caracteristici esențiale cum ar fi:
-* Greutatea coletului
-* Distanța pe care o parcurge livrarea
-* Prioritatea livrării (dacă e prioritară sau nu)
+---
 
-Aceste trei proprietăți formează baza pentru calculul costului de livrare, timpul de livrare și alte informații importante.
+## 📦 Clasa `Livrare`
 
-1. Atributele clasei:
-* greutateKg (tip double): Reprezintă greutatea coletului în kilograme.
-* Regula este că dacă greutatea e mai mare de 5 kg, se adaugă costuri suplimentare.
+Reprezintă o livrare individuală, cu atribute esențiale:
 
-* distantaKm (tip double): Reprezintă distanța, în kilometri, pe care trebuie să o parcurgă livrarea.
-* Distanța mai mare de 20 km influențează costul, iar pentru anumite greutăți, se adaugă costuri suplimentare pentru distanțele mari.
+### 🔸 Atribute
+- `double greutateKg`: greutatea coletului (kg)  
+  > Dacă greutatea > 5 kg → cost suplimentar.
+  
+- `double distantaKm`: distanța de livrare (km)  
+  > Dacă distanța > 20 km și greutatea > 10 kg → cost suplimentar pe distanță.
 
-* prioritar (tip boolean): Reprezintă dacă livrarea este prioritară sau nu.
-* Dacă livrarea este prioritară, costul va fi multiplicat cu un factor de 1.25. Dacă nu este prioritară, va fi aplicat un factor de reducere (0.95).
+- `boolean prioritar`: indică dacă livrarea este prioritară  
+  > - Livrare **prioritară**: costul este multiplicat cu `1.25`  
+  > - Livrare **neprioritară**: costul este redus cu `5%` (factor `0.95`)
 
-2. Construcție:
-Constructor: Permite crearea unui obiect Livrare cu greutate, distanță și prioritate specificate.
+### 🔧 Constructor
+```java
 public Livrare(double greutateKg, double distantaKm, boolean prioritar)
+```
 
+### 🔍 Metode
+- `getGreutateKg()`
+- `getDistantaKm()`
+- `estePrioritara()`
 
-3. Metodele clasei Livrare:
-* getGreutateKg(): Returnează greutatea coletului.
-* getDistantaKm(): Returnează distanța livrării.
-* estePrioritara(): Verifică dacă livrarea este prioritară.
+---
 
+## 🧠 Clasa `ServiciuLivrare`
 
+Această clasă implementează logica aplicabilă unei livrări:
 
+### 1️⃣ `double calculeazaCostLivrare(Livrare livrare)`
+Calculează costul livrării pe baza regulilor:
 
+- Cost de bază: **10 lei**
+- Dacă greutatea > 5 kg → + `2 lei` per kg peste 5
+- Dacă distanța > 20 km **și** greutatea > 10 kg → + `1.5 lei` per fiecare 10 km
+- Cost final:
+  - `* 1.25` dacă e prioritară
+  - `* 0.95` dacă NU e prioritară
+- Plafon maxim: **200 lei**
 
+---
+
+### 2️⃣ `String clasificaLivrare(Livrare livrare)`
+Clasifică livrarea în funcție de cost:
+
+- **"Ieftină"**: sub 75 lei
+- **"Standard"**: între 75 și 150 lei
+- **"Scumpă"**: peste 150 lei
+
+---
+
+### 3️⃣ `boolean esteEligibilaReducere(Livrare livrare)`
+Verifică dacă livrarea este eligibilă pentru reducere:
+
+> Livrarea este eligibilă dacă:
+> - greutatea < 2 kg
+> - **și** livrarea NU este prioritară
+
+---
+
+### 4️⃣ `double estimeazaTimpLivrare(Livrare livrare)`
+Estimează timpul de livrare (în ore):
+
+- Timp de bază: `(distanta / 10) + 1`
+- Dacă livrarea este prioritară → se scade 1 oră
+- Timpul minim: **1 oră**
+
+---
+
+## 🧪 Testare unitară
+Clasele sunt concepute pentru a fi ușor de testat cu JUnit. Exemple de aspecte ce pot fi testate:
+
+- Clase de echivalență și valori de frontieră pentru greutate/distanță
+- Acoperire structurală: decizii, condiții, bucle
+- Teste funcționale pentru clasificare, eligibilitate și estimare timp
+- Analiza cu tool-uri de mutație (ex: PIT)
+
+---
