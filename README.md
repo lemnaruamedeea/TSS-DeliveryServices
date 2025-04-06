@@ -3,7 +3,7 @@
 ## Clasa Livrare
 
 Clasa Livrare reprezintă o livrare pe care o trimitem printr-un serviciu de transport, având caracteristici esențiale cum ar fi:
-⋅⋅* Greutatea coletului
+* Greutatea coletului
 ⋅⋅* Distanța pe care o parcurge livrarea
 ⋅⋅* Prioritatea livrării (dacă e prioritară sau nu)
 
