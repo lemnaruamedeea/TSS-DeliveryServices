@@ -1,5 +1,7 @@
 package src.main;
 
+import src.main.Livrare;
+
 public class ServiciuLivrare {
     public double calculeazaCostLivrare(Livrare livrare) {
         double greutate = livrare.getGreutateKg();
