@@ -1,3 +1,13 @@
+/*
+Teste unitare pentru verificarea logicii de calcul al costurilor de livrare
+Sut testate ramurile (if/else) și conditiile complexe sunt evaluate corect.
+Ele testează scenarii normale și exceptionale (ex. valori negative, livrare prioritara/neprioritara) pentru a garanta că aplicatia răspunde corect in orice situatie
+
+Testele sunt împărțite in 2 secțiuni:
+1. Teste pentru Condiții (cazurile cu greutate si distanta invalide, exceptii, etc.)
+2. Teste pentru Decizii(logica pt livrari (non)prioritare, verificam livrarile ieftine)
+ */
+
 package src.teste;
 
 import src.main.Livrare;
@@ -8,14 +18,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TesteConditieDecizie {
 
-    // Instanțiem clasa care conține logica de livrare
+    // clasa care contine logica de livrare
     ServiciuLivrare serviciu = new ServiciuLivrare();
 
-    // ========================
-    //        TESTE CONDIȚII
-    // ========================
+    // TESTE CONDIȚII
 
-    // Test pentru cazul în care greutatea este 0 — așteptăm excepție
+
+    // test pentru cazul în care greutatea este 0 (posibila exceptie)
     @Test
     public void testGreutateZero() {
         Livrare livrare = new Livrare(0, 10.0, false);
@@ -25,7 +34,7 @@ public class TesteConditieDecizie {
         assertEquals("Greutatea si distanta trebuie sa fie pozitive.", exception.getMessage());
     }
 
-    // Test pentru cazul în care distanța este 0 — așteptăm excepție
+    // test pentru cazul în care distanța este 0 (posibila exceptie)
     @Test
     public void testDistantaZero() {
         Livrare livrare = new Livrare(5.0, 0, false);
@@ -35,7 +44,7 @@ public class TesteConditieDecizie {
         assertEquals("Greutatea si distanta trebuie sa fie pozitive.", exception.getMessage());
     }
 
-    // Testăm suplimentul pentru greutate mai mare decât 5
+    // testam suplimentul pentru greutate mai mare decât 5
     @Test
     public void testGreutateMaiMareDecat5() {
         Livrare livrare = new Livrare(6.0, 10.0, false);
@@ -43,7 +52,7 @@ public class TesteConditieDecizie {
         assertTrue(cost > 10); // Ar trebui să reflecte suplimentul de greutate
     }
 
-    // Test pentru greutate > 10 și distanță > 20 — activează logica din bucla for
+    // Test pentru greutate > 10 și distanță > 20 (logica din bucla for)
     @Test
     public void testDistantaSiGreutateMare() {
         Livrare livrare = new Livrare(12.0, 30.0, true);
@@ -51,7 +60,7 @@ public class TesteConditieDecizie {
         assertTrue(cost > 0);  // Costul trebuie să includă suplimentul din bucla for
     }
 
-    // Distanța < 20 — bucla for nu trebuie activată
+    // distanța < 20
     @Test
     public void testDistantaMaiMicaDe20() {
         Livrare livrare = new Livrare(10.0, 15.0, false);
@@ -59,15 +68,7 @@ public class TesteConditieDecizie {
         assertTrue(cost > 0); // Costul de bază fără suplimente din for
     }
 
-    // Test similar cu testDistantaSiGreutateMare — validare redundanță
-    @Test
-    public void testDistantaSiGreutateMari() {
-        Livrare livrare = new Livrare(12.0, 30.0, true);
-        double cost = serviciu.calculeazaCostLivrare(livrare);
-        assertTrue(cost > 0); // Confirmăm execuția for-ului
-    }
-
-    // Testăm excepție pentru greutate negativă
+    // Testăm excepție pentru greutate negativa
     @Test
     public void testGreutateNegativa() {
         Livrare livrare = new Livrare(-1.0, 10.0, false);
@@ -77,7 +78,7 @@ public class TesteConditieDecizie {
         assertEquals("Greutatea si distanta trebuie sa fie pozitive.", exception.getMessage());
     }
 
-    // Testăm excepție pentru distanță negativă
+    // Testăm excepție pentru distanță negativa
     @Test
     public void testDistantaNegativa() {
         Livrare livrare = new Livrare(5.0, -10.0, false);
@@ -88,35 +89,34 @@ public class TesteConditieDecizie {
     }
 
 
-    // ========================
-    //        TESTE DECIZII
-    // ========================
+    // TESTE DECIZII
 
-    // Test pentru livrare cu prioritate — se aplică un multiplicator
+
+    // test pentru livrare cu prioritate
     @Test
     public void testLivrarePrioritara() {
         Livrare livrare = new Livrare(12.0, 30.0, true);
         double cost = serviciu.calculeazaCostLivrare(livrare);
-        assertTrue(cost > 10); // Costul ar trebui să fie crescut cu 20%
+        assertTrue(cost > 10); // costul ar trebui să fie crescut cu 20%
     }
 
-    // Test pentru livrare non-prioritară — se aplică reducerea de 5%
+    // test pentru livrare non-prioritară (reducerea de 5%)
     @Test
     public void testLivrareNonPrioritara() {
         Livrare livrare = new Livrare(12.0, 30.0, false);
         double cost = serviciu.calculeazaCostLivrare(livrare);
-        assertTrue(cost < 200); // Ne asigurăm că este mai mic decât un prag arbitrar
+        assertTrue(cost < 200); // ne asiguram ca este mai mic decât un prag
     }
 
-    // Test pentru declanșarea for-ului cu greutate > 10 și distanță > 20
+    // test pentru declanșarea for-ului cu greutate > 10 și distanta > 20
     @Test
     public void testDistantaSiGreutateMaiMari() {
         Livrare livrare = new Livrare(15.0, 25.0, false);
         double cost = serviciu.calculeazaCostLivrare(livrare);
-        assertTrue(cost > 10); // Bucla for ar trebui să crească costul
+        assertTrue(cost > 10); // bucla for ar trebui sa crească costul
     }
 
-    // Test pentru clasificare "Ieftina"
+    // test pentru cat de ieftina e livrarea
     @Test
     public void testCostLivrareIeftina() {
         Livrare livrare = new Livrare(2.0, 5.0, false);
@@ -124,19 +124,19 @@ public class TesteConditieDecizie {
         assertEquals("Ieftina", clasificare);
     }
 
-    // Test pentru valoarea limită distanță = 20 (nu trebuie să intre în for)
+    // test pentru valoarea distanta = 20
     @Test
     public void testDistantaExact20() {
         Livrare livrare = new Livrare(12.0, 20.0, false);
         double cost = serviciu.calculeazaCostLivrare(livrare);
-        assertTrue(cost > 0); // Se verifică costul fără intrare în bucla for
+        assertTrue(cost > 0); // se verifică costul fara intrare în bucla for
     }
 
-    // Test pentru valoarea limită greutate = 10 (posibil să nu intre în for)
+    // test pentru valoare greutate = 10
     @Test
     public void testGreutateExact10() {
         Livrare livrare = new Livrare(10.0, 25.0, false);
         double cost = serviciu.calculeazaCostLivrare(livrare);
-        assertTrue(cost > 0); // Depinde dacă condiția for e strict > sau ≥
+        assertTrue(cost > 0); // depinde daca condiția for e strict > sau >=
     }
 }
