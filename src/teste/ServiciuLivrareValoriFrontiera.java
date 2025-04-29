@@ -11,8 +11,6 @@ public class ServiciuLivrareValoriFrontiera {
     private final ServiciuLivrare serviciu = new ServiciuLivrare();
 
     /////////// metoda calculeazaCostLivrare ///////////////
-
-
     @Test
     void testGreutateLaZero() {
         Livrare livrare = new Livrare(0, 10, false);
@@ -105,7 +103,7 @@ public class ServiciuLivrareValoriFrontiera {
     @Test
     void testClasificareStandardLaLimita() {
         Livrare livrare = new Livrare(10, 40, false); // costul trece de 75
-        assertEquals("Iefitina", serviciu.clasificaLivrare(livrare));
+        assertEquals("Ieftina", serviciu.clasificaLivrare(livrare));
     }
 
     @Test
