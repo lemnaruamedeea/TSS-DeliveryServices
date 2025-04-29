@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Default ignored files
 /.idea/shelf/
 /workspace.xml
@@ -12,3 +13,17 @@
 *.iml
 .idea/
 
+=======
+# IntelliJ project files
+.idea/
+*.iml
+
+# Build output
+out/
+target/
+build/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+>>>>>>> main
