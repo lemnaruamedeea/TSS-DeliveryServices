@@ -1,6 +1,6 @@
-package main;
+package src.main;
 
-import main.Livrare;
+import src.main.Livrare;
 
 public class ServiciuLivrare {
     public double calculeazaCostLivrare(Livrare livrare) {

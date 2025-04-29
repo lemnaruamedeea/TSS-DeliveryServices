@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_29_04_2025_23_34_[Changes]" date="1745958872639" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_04_2025_23_34_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 29.04.2025 23:34 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/TSS-DeliveryServices/src/teste/TesteInstructiune.class" />
+    <option name="AFTER_PATH" value="out/production/TSS-DeliveryServices/src/teste/TesteInstructiune.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_04_2025_23_34_[Changes]/TesteInstructiune.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/TSS-DeliveryServices/src/teste/TesteConditieDecizie.class" />
+    <option name="AFTER_PATH" value="out/production/TSS-DeliveryServices/src/teste/TesteConditieDecizie.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_04_2025_23_34_[Changes]/TesteConditieDecizie.class" />
+  </binary>
+</changelist>

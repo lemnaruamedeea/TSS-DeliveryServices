@@ -1,4 +1,10 @@
-package teste;
+package src.teste;
+
+import src.main.Livrare;
+import src.main.ServiciuLivrare;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ServiciuLivrareCircuiteIndependente {
 

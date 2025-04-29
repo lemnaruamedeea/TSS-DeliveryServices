@@ -1,5 +1,7 @@
-import main.Livrare;
-import main.ServiciuLivrare;
+package src;
+
+import src.main.Livrare;
+import src.main.ServiciuLivrare;
 
 public class AppStartup {
     public static void main(String[] args) {
