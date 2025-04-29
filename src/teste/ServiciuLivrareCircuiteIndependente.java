@@ -48,5 +48,3 @@ public class ServiciuLivrareCircuiteIndependente {
         assertEquals(34.2, cost, 0.001);
     }
 }
-
-}
