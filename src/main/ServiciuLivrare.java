@@ -19,9 +19,11 @@ public class ServiciuLivrare {
         }
 
         if (distanta > 20 && greutate > 10) {
-            for (int i = 0; i < (int)(distanta / 10); i++) {
-                costBaza += 1.5;
+            int kmSuplimentari = (int)((distanta - 20) / 10);
+            if (kmSuplimentari > 0) {
+                costBaza += kmSuplimentari * 1.5;
             }
+
         }
 
         if (prioritar) {
