@@ -37,8 +37,8 @@ public class ServiciuLivrare {
 
     public String clasificaLivrare(Livrare livrare) {
         double cost = calculeazaCostLivrare(livrare);
-        if (cost > 150) return "Scumpa";
-        if (cost > 75) return "Standard";
+        if (cost >= 150) return "Scumpa";
+        if (cost >= 75 && cost < 150) return "Standard";
         return "Ieftina";
     }
 

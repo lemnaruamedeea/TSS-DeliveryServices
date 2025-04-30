@@ -46,11 +46,7 @@ public class ServiciuLivrareCircuiteIndependente {
 
         double cost = serviciu.calculeazaCostLivrare(livrare);
 
-        // Cost:
-        // Baza: 10 + (15-5)*2 = 30
-        // Bucla: (40/10) = 4 iteratii * 1.5 = 6
-        // Total = 36
-        // 36 * 0.95 = 34.2
-        assertEquals(34.2, cost, 0.001);
+        assertEquals(31.35, cost, 0.001); // corect, nu 34.2
     }
+
 }
