@@ -365,4 +365,95 @@ Verificăm că fiecare **condiție individuală** (ex: `greutate <= 0`, `distant
 
 </details>
 
+<details>
+<summary> <b>🧬 Raport Testare Mutațională </b> </summary>
+Acest raport evidențiază impactul testelor suplimentare asupra eficienței testării mutaționale, concentrându-se pe eliminarea mutanților supraviețuitori generați inițial și analiza celor rămași.
 
+## ⚙️ Configurație
+
+* **Tool utilizat**: [PIT (Pitest)](https://pitest.org/)
+* **Clasă testată**: `ServiciuLivrare`
+* **Mutatori folosiți**:
+
+  * `ConditionalsBoundaryMutator`
+  * `MathMutator`
+  * `NegateConditionalsMutator`
+  * `PrimitiveReturnsMutator`
+  * `BooleanTrueReturnValsMutator`
+  * `IncrementsMutator`
+  * `EmptyObjectReturnValsMutator`
+
+---
+
+## 📊 Comparație Rezultate - Înainte vs După
+
+|                          | Înainte Teste Suplimentare | După Teste Suplimentare |
+| ------------------------ | -------------------------- | ----------------------- |
+| Total mutații generate   | 43                         | 43                      |
+| Mutații omorâte (killed) | 35                         | 38                      |
+| Mutații supraviețuitoare | 8                          | 5                       |
+| Putere testare           | 81%                        | **88%**                 |
+| Linii acoperite          | 28/28 (100%)               | 28/28 (100%)            |
+| Teste rulate             | 222                        | **300**                 |
+
+---
+
+## ❌ Mutanți Rămași în Viață
+
+Toți cei **5 mutanți** supraviețuitori provin din `ConditionalsBoundaryMutator`. Aceștia afectează condiții de margine și nu au fost eliminați de testele existente.
+
+### 📌 Detalii Mutanți
+
+#### 1. `calculeazaCostLivrare` - linia 17
+
+* **Descriere:** modificare a pragului `greutate <= 5`
+* **Test suplimentar:** Adaugă un test pentru `greutate = 5`
+
+#### 2. `calculeazaCostLivrare` - linia 21
+
+* **Descriere:** modificare a pragului `distanta > 20`
+* **Test suplimentar:** Testează `distanta = 20` cu `greutate > 10`
+
+* **Descriere:** modificare a pragului `greutate > 10`
+* **Test suplimentar:** Testează `greutate = 10` cu `distanta > 20`
+
+#### 3. `calculeazaCostLivrare` - linia 23
+
+* **Descriere:** modificare condiție `kmSuplimentari > 0`
+* **Test suplimentar:** Verifică dacă nu se adaugă cost când `kmSuplimentari = 0`
+
+#### 4. `clasificaLivrare` - linia 40
+
+* **Descriere:** modificare a pragului `cost >= 150`
+* **Test suplimentar:** Testează `cost = 150`
+
+#### 5. `clasificaLivrare` - linia 41
+
+* **Descriere:** modificare a pragului `cost >= 75`
+* **Test suplimentar:** Testează `cost = 75`
+
+* **Descriere:** modificare a pragului `cost < 150`
+
+#### 6. `estimeazaTimpLivrare` - linia 57
+
+* **Descriere:** modificare condiție `timp < 1`
+* **Test suplimentar:** Verifică `timp = 1`
+
+---
+
+## 📈 Efecte Observate
+
+* 🔹 **3 mutanți suplimentari eliminați** (din 8 → 5)
+* 🔹 Creștere a **puterii de testare cu 7%**, de la 81% la 88%
+* 🔹 Timpul de execuție al testelor a crescut moderat (de la 222 la 300)
+
+---
+
+## 🏁 Concluzie
+
+* Testele adăugate și-au atins scopul: eliminarea mutanților sensibili la condiții logice de margine
+* Toți mutanții generați de ceilalți mutatori (alții decât `ConditionalsBoundaryMutator`) au fost omorâți încă din faza inițială
+* Focusul rămâne pe rafinarea logicii condiționale și a testelor de margine
+
+
+</details>
