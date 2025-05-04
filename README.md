@@ -96,7 +96,70 @@ Ieșirea programului conține:
 
 
 
+<details>
+  <summary><b>🚧 Analiza testelor de frontieră</b></summary>
 
+### 🧪 Obiectiv
+Această analiză vizează testarea comportamentului serviciului de livrare în apropierea limitelor permise ale intrărilor, acolo unde este cel mai probabil să apară erori.
+
+---
+
+### 📥 Domeniul intrărilor:
+- `g` – greutatea coletului (`double`, trebuie să fie > 0)
+- `d` – distanța de livrare (`double`, trebuie să fie > 0)
+- `p` – livrare prioritară (`boolean`)
+
+---
+
+### 🔧 Teste pentru `calculeazaCostLivrare`
+
+| Nr. test                          | Scop                              | g     | d   | p     | Rezultat așteptat         |
+|--------------------------------|-----------------------------------|-------|-----|-------|----------------------------|
+| 1         | Limită invalidă                   | 0     | 10  | false | Excepție (`IllegalArgument`) |
+| 2    | Limită validă                     | 0.1   | 10  | false | Cost > 0                  |
+| 3        | Prag de reducere                  | 5     | 10  | false | 9.5                       |
+| 4        | Ușor peste prag                   | 5.01  | 10  | false | 9.52                      |
+| 5 | Prag pentru taxa de km          | 10    | 20  | false | 19.0                      |
+| 6| Suprataxă aplicată                | 10.01 | 30  | false | 20.44                     |
+| 7       | Distanță invalidă                 | 5     | 0   | false | Excepție (`IllegalArgument`) |
+| 8    | Limită validă                     | 5     | 0.1 | false | Cost > 0                  |
+| 9       | Prag pentru cost suplimentar      | 11    | 20  | false | 20.9                      |
+| 10| Distanță peste limită            | 11    | 30  | false | 22.325                    |
+| 11        | Cost prioritar                    | 5     | 10  | true  | 12.5                      |
+| 12         | Cost non-prioritar                | 5     | 10  | false | 9.5                       |
+
+---
+
+### 🏷️ Teste pentru `clasificaLivrare`
+
+|  Nr. test                                | Scop                              | g     | d   | p     | Clasificare Așteptată     |
+|--------------------------------|-----------------------------------|-------|-----|-------|----------------------------|
+| 1      | Cost scăzut                       | 1     | 5   | false | Ieftina                   |
+| 2 | Cost spre 75                  | 10    | 40  | false | Ieftina                   |
+| 3| Cost foarte mare                  | 100   | 200 | true  | Scumpa                    |
+
+---
+
+### 🎯 Teste pentru `esteEligibilaReducere`
+
+|  Nr. test                                 | g     | p     | Așteptat |
+|----------------------------------|-------|-------|----------|
+| 1 | 1.99  | false | true     |
+| 2     | 1.99  | true  | false    |
+| 3   | 2.0   | false | false    |
+
+---
+
+### ⏱️ Teste pentru `estimeazaTimpLivrare`
+
+|  Nr. test                             | d     | p     | Așteptat |
+|------------------------------|-------|-------|----------|
+| 1   | 9.9   | false | 1        |
+| 2   | 10    | false | 2        |
+| 3| 10    | true  | 1        |
+| 4  | 0.5   | true  | 1        |
+
+</details>
 
 
 
