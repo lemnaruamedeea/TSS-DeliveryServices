@@ -455,5 +455,70 @@ Toți cei **5 mutanți** supraviețuitori provin din `ConditionalsBoundaryMutato
 * Toți mutanții generați de ceilalți mutatori (alții decât `ConditionalsBoundaryMutator`) au fost omorâți încă din faza inițială
 * Focusul rămâne pe rafinarea logicii condiționale și a testelor de margine
 
+</details>
+
+<details> 
+  <summary> <b> Detalii despre circuite independente </b> </summary>
+
+### Graful de flux de control - calculeazaCostLivrare
+N1: Start
+N2: Validare greutate și distanță (if (greutate <= 0 || distanta <= 0))
+N3: Aruncare excepție
+N4: Inițializare costBaza = 10.0
+N5: if (greutate > 5)
+N6: costBaza += (greutate - 5) * 2
+N7: if (distanta > 20 && greutate > 10)
+N8: kmSuplimentari = (distanta - 20)/10
+N9: if (kmSuplimentari > 0)
+N10: costBaza += kmSuplimentari * 1.5
+N11: if (prioritar)
+N12: costBaza *= 1.25
+N13: else: costBaza *= 0.95
+N14: Return Math.min(costBaza, 200)
+N15: End
+
+e =muchii = 16
+n =noduri= 15     => V(G) = 16 - 15 + 2 = 3
+
+## Circuite independente:
+
+N1 → N2(false) → N4 → N5(false) → N7(false) → N11(true) → N12 → N14
+N1 → N2(false) → N4 → N5(true) → N6 → N7(true) → N8 → N9(true) → N10 → N11(false) → N13 → N14
+N1 → N2(true) → N3
+
+
+### Cauze:
+C1: greutate <= 0
+C2: distanță <= 0
+C3: greutate > 5
+C4: distanță > 20
+C5: greutate > 10
+C6: kmSuplimentari > 0
+C7: livrare este prioritară
+
+### Efecte:
+E1: Excepție IllegalArgumentException
+E2: costBaza += (greutate - 5) * 2
+E3: costBaza += kmSuplimentari * 1.5
+E4: costBaza *= 1.25
+E5: costBaza *= 0.95
+E6: return min(cost, 200)
+
+| C1 | C2 | C3 | C4 | C5 | C6 | C7 | E1 | E2 | E3 | E4 | E5 | E6 |
+| -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
+| 1  | 0  | -  | -  | -  | -  | -  | 1  | 0  | 0  | 0  | 0  | 0  |
+| 0  | 1  | -  | -  | -  | -  | -  | 1  | 0  | 0  | 0  | 0  | 0  |
+| 0  | 0  | 0  | 0  | 0  | 0  | 1  | 0  | 0  | 0  | 1  | 0  | 1  |
+| 0  | 0  | 1  | 1  | 1  | 1  | 0  | 0  | 1  | 1  | 0  | 1  | 1  |
+
+### Relații:
+C1 ∨ C2 ⇒ E1
+C3 ⇒ E2
+(C4 ∧ C5 ∧ C6) ⇒ E3
+C7 ⇒ E4
+¬C7 ⇒ E5
+→ E6 întotdeauna
+![ts](https://github.com/user-attachments/assets/06cbd7bd-b46b-42ff-bb21-3fb3d0595c79)
 
 </details>
+
