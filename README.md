@@ -461,21 +461,21 @@ Toți cei **5 mutanți** supraviețuitori provin din `ConditionalsBoundaryMutato
   <summary> <b>🔄Detalii despre circuite independente </b> </summary>
 
 ### Graful de flux de control - calculeazaCostLivrare
-N1: Start
-N2: Validare greutate și distanță (if (greutate <= 0 || distanta <= 0))
-N3: Aruncare excepție
-N4: Inițializare costBaza = 10.0
-N5: if (greutate > 5)
-N6: costBaza += (greutate - 5) * 2
-N7: if (distanta > 20 && greutate > 10)
-N8: kmSuplimentari = (distanta - 20)/10
-N9: if (kmSuplimentari > 0)
-N10: costBaza += kmSuplimentari * 1.5
-N11: if (prioritar)
-N12: costBaza *= 1.25
-N13: else: costBaza *= 0.95
-N14: Return Math.min(costBaza, 200)
-N15: End
+N1: Start    
+N2: Validare greutate și distanță (if (greutate <= 0 || distanta <= 0))   
+N3: Aruncare excepție   
+N4: Inițializare costBaza = 10.0    
+N5: if (greutate > 5)   
+N6: costBaza += (greutate - 5) * 2      
+N7: if (distanta > 20 && greutate > 10)    
+N8: kmSuplimentari = (distanta - 20)/10    
+N9: if (kmSuplimentari > 0)    
+N10: costBaza += kmSuplimentari * 1.5    
+N11: if (prioritar)    
+N12: costBaza *= 1.25   
+N13: else: costBaza *= 0.95    
+N14: Return Math.min(costBaza, 200)   
+N15: End    
 
 e =muchii = 16
 n =noduri= 15     => V(G) = 16 - 15 + 2 = 3
