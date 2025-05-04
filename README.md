@@ -458,7 +458,7 @@ Toți cei **5 mutanți** supraviețuitori provin din `ConditionalsBoundaryMutato
 </details>
 
 <details> 
-  <summary> <b> Detalii despre circuite independente </b> </summary>
+  <summary> <b>🔄Detalii despre circuite independente </b> </summary>
 
 ### Graful de flux de control - calculeazaCostLivrare
 N1: Start
