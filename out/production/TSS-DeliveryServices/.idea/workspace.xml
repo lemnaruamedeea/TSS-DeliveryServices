@@ -4,14 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9232463-0818-479a-959b-91bf0566718b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/Livrare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Livrare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/ServiciuLivrare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/ServiciuLivrare.java" afterDir="false" />
+    <list default="true" id="a9232463-0818-479a-959b-91bf0566718b" name="Changes" comment="Bug fixes">
+      <change beforePath="$PROJECT_DIR$/out/production/TSS-DeliveryServices/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TSS-DeliveryServices/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TSS-DeliveryServices/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TSS-DeliveryServices/report/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TSS-DeliveryServices/report/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TSS-DeliveryServices/report/mutations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TSS-DeliveryServices/report/mutations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/mutations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/report/mutations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/src.main/ServiciuLivrare.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/report/src.main/ServiciuLivrare.java.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/teste/TesteSuplimentareMutanti.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/teste/TesteSuplimentareMutanti.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -21,45 +33,155 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "lemnaruamedeea"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;lemnaruamedeea&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/lemnaruamedeea/TSS-DeliveryServices.git",
-    "accountId": "482555e0-b486-4834-9bff-e9e7cb9146fe"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/lemnaruamedeea/TSS-DeliveryServices.git&quot;,
+    &quot;accountId&quot;: &quot;482555e0-b486-4834-9bff-e9e7cb9146fe&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 3
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2wPy53qqqyh4xsFvq5EUiG2EWo9" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.TesteConditieDecizie.executor": "Run",
-    "JUnit.TesteInstructiune.executor": "Run",
-    "PIT Runner.PIT.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "CircuiteIndependente",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.ServiciuLivrareCircuiteIndependente.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ServiciuLivrareClaseEchivalenta.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ServiciuLivrareValoriFrontiera.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TesteConditieDecizie.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TesteInstructiune.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TesteSuplimentareMutanti.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TesteSuplimentareMutanti.testClasificareCostExact150.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TesteSuplimentareMutanti.testDistantaFix20_GreutateFix10_FaraTaxaKm.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TesteSuplimentareMutanti.testDistantaPeste20SiGreutatePeste10.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TesteSuplimentareMutanti.testGreutateFix5_NuSeAplicaTaxa.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TesteSuplimentareMutanti.testGreutatePeste5.executor&quot;: &quot;Run&quot;,
+    &quot;PIT Runner.PIT.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mutanti&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="PIT Runner.PIT">
+    <configuration name="TesteSuplimentareMutanti.testClasificareCostExact150" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TSS-DeliveryServices" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.teste.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="src.teste" />
+      <option name="MAIN_CLASS_NAME" value="src.teste.TesteSuplimentareMutanti" />
+      <option name="METHOD_NAME" value="testClasificareCostExact150" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TesteSuplimentareMutanti.testDistantaFix20_GreutateFix10_FaraTaxaKm" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TSS-DeliveryServices" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.teste.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="src.teste" />
+      <option name="MAIN_CLASS_NAME" value="src.teste.TesteSuplimentareMutanti" />
+      <option name="METHOD_NAME" value="testDistantaFix20_GreutateFix10_FaraTaxaKm" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TesteSuplimentareMutanti.testDistantaPeste20SiGreutatePeste10" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TSS-DeliveryServices" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.teste.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="src.teste" />
+      <option name="MAIN_CLASS_NAME" value="src.teste.TesteSuplimentareMutanti" />
+      <option name="METHOD_NAME" value="testDistantaPeste20SiGreutatePeste10" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TesteSuplimentareMutanti.testGreutateFix5_NuSeAplicaTaxa" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TSS-DeliveryServices" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.teste.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="src.teste" />
+      <option name="MAIN_CLASS_NAME" value="src.teste.TesteSuplimentareMutanti" />
+      <option name="METHOD_NAME" value="testGreutateFix5_NuSeAplicaTaxa" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TesteSuplimentareMutanti.testGreutatePeste5" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TSS-DeliveryServices" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.teste.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="src.teste" />
+      <option name="MAIN_CLASS_NAME" value="src.teste.TesteSuplimentareMutanti" />
+      <option name="METHOD_NAME" value="testGreutatePeste5" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PIT" type="PIT" factoryName="PIT Runner" singleton="false" REPORT_DIR="$PROJECT_DIR$/report" SOURCE_DIRS="$PROJECT_DIR$/src" TARGET_CLASSES="src.main.ServiciuLivrare" TARGET_TESTS="" otherParams="--outputFormats XML,HTML --targetTests src.teste.*">
       <module name="TSS-DeliveryServices" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.TesteSuplimentareMutanti.testClasificareCostExact150" />
+      <item itemvalue="JUnit.TesteSuplimentareMutanti.testDistantaFix20_GreutateFix10_FaraTaxaKm" />
+      <item itemvalue="JUnit.TesteSuplimentareMutanti.testDistantaPeste20SiGreutatePeste10" />
+      <item itemvalue="JUnit.TesteSuplimentareMutanti.testGreutateFix5_NuSeAplicaTaxa" />
+      <item itemvalue="JUnit.TesteSuplimentareMutanti.testGreutatePeste5" />
+      <item itemvalue="PIT Runner.PIT" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TesteSuplimentareMutanti.testClasificareCostExact150" />
+        <item itemvalue="JUnit.TesteSuplimentareMutanti.testDistantaPeste20SiGreutatePeste10" />
+        <item itemvalue="JUnit.TesteSuplimentareMutanti.testGreutatePeste5" />
+        <item itemvalue="JUnit.TesteSuplimentareMutanti.testDistantaFix20_GreutateFix10_FaraTaxaKm" />
+        <item itemvalue="JUnit.TesteSuplimentareMutanti.testGreutateFix5_NuSeAplicaTaxa" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
