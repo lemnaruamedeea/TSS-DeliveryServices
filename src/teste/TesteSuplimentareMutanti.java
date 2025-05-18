@@ -10,35 +10,14 @@ public class TesteSuplimentareMutanti {
     private final ServiciuLivrare serviciu = new ServiciuLivrare();
 
     @Test
-    public void testGreutateExact5NuAdaugaCost() {
-        Livrare livrare = new Livrare(5.0, 10.0, false);
+    void testGreutateFix5() {
+        ServiciuLivrare serviciu = new ServiciuLivrare();
+        Livrare livrare = new Livrare(5.0, 20.0, false);
+
         double cost = serviciu.calculeazaCostLivrare(livrare);
-        assertEquals(9.5, cost, 0.01); // 10.0 * 0.95 (fără extra cost)
+
+        assertEquals(9.5, cost, 0.001); // 10 * 0.95
     }
-
-//    @Test
-//    public void testCostGreutatePeste5() {
-//        Livrare livrare = new Livrare(5.0, 10.0, false);
-//        double cost = serviciu.calculeazaCostLivrare(livrare);
-//        // cost = 10 + 0.2 = 10.2 * 0.95
-//        assertEquals(9.69, cost, 0.01);
-//    }
-
-//    @Test
-//    public void testCostExactDistantaLimita20Greutate10() {
-//        Livrare livrare = new Livrare(10.0, 20.0, false);
-//        double cost = serviciu.calculeazaCostLivrare(livrare);
-//        // cost = 10.0 * 0.95
-//        assertEquals(9.5, cost, 0.01);
-//    }
-//
-//    @Test
-//    public void testCostDistanta21Greutate11() {
-//        Livrare livrare = new Livrare(11.0, 21.0, false);
-//        // costBaza: 10 + (11-5)*2 = 22 + 1.5 extra
-//        // total = 23.5 * 0.95
-//        assertEquals(22.325, serviciu.calculeazaCostLivrare(livrare), 0.01);
-//    }
 
     @Test
     public void testClasificareCostExact150() {
@@ -47,14 +26,6 @@ public class TesteSuplimentareMutanti {
         assertEquals(150.0, cost, 0.01);
         assertEquals("Scumpa", serviciu.clasificaLivrare(livrare));
     }
-
-//    @Test
-//    public void testClasificareCostSub150() {
-//        Livrare livrare = new Livrare(14.9, 20.0, true); // Configurează ~149.99
-//        double cost = serviciu.calculeazaCostLivrare(livrare);
-//        assertTrue(cost < 150);
-//        assertEquals("Standard", serviciu.clasificaLivrare(livrare));
-//    }
 
 
     @Test
@@ -66,33 +37,33 @@ public class TesteSuplimentareMutanti {
     }
 
     @Test
-    public void testTimpLivrareSub1EsteCorectatLa1() {
-        Livrare livrare = new Livrare(1.0, 5.0, true); // (5 / 10) + 1 = 1 - 1 = 0
+    void testDistantaFix20GreutatePeste10() {
+        Livrare livrare = new Livrare(11.0, 20.0, false);
+        double cost = serviciu.calculeazaCostLivrare(livrare);
+        // cost = 10 + (11-5)*2 = 22.0 * 0.95
+        assertEquals(20.9, cost, 0.01);
+    }
+
+    @Test
+    void testDistantaPeste20GreutateFix10() {
+        Livrare livrare = new Livrare(10.0, 30.0, false);
+        double cost = serviciu.calculeazaCostLivrare(livrare);
+        // nu se adaugă cost suplimentar pentru distanță pentru că greutatea nu e >10
+        assertEquals(19.0, cost, 0.01);
+    }
+
+    @Test
+    void testKmSuplimentariZero() {
+        Livrare livrare = new Livrare(11.0, 24.0, false);
+        double cost = serviciu.calculeazaCostLivrare(livrare);
+        assertEquals(20.9, cost, 0.01);
+    }
+
+    @Test
+    void testTimpLivrareMinim() {
+        Livrare livrare = new Livrare(1.0, 5.0, true);
         int timp = serviciu.estimeazaTimpLivrare(livrare);
         assertEquals(1, timp);
     }
-
-
-//    @Test
-//    public void testTimpLivrareDevineSub1SiEsteCorectatLa1() {
-//        Livrare livrare = new Livrare(1.0, 0.1, true); // (0.1 / 10) + 1 = 1, -1 = 0
-//        // trebuie să intre în if (timp < 1)
-//        int timp = serviciu.estimeazaTimpLivrare(livrare);
-//        assertEquals(1, timp);
-//    }
-//
-//    @Test
-//    public void testTimpLivrareExact1NuEsteModificat() {
-//        Livrare livrare = new Livrare(1.0, 10.0, false); // timp = 0 + 1 = 1
-//        int timp = serviciu.estimeazaTimpLivrare(livrare);
-//        assertEquals(2, timp);
-//    }
-//
-//    @Test
-//    public void testTimpLivrareExact1NuEsteModificat1() {
-//        Livrare livrare = new Livrare(1.0, 9.9, false); // timp = 0 + 1 = 1
-//        int timp = serviciu.estimeazaTimpLivrare(livrare);
-//        assertEquals(1, timp);
-//    }
 
 }
