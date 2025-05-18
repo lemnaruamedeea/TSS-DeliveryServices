@@ -518,7 +518,8 @@ C3 ⇒ E2
 C7 ⇒ E4   
 ¬C7 ⇒ E5    
 → E6 întotdeauna   
-![ts](https://github.com/user-attachments/assets/06cbd7bd-b46b-42ff-bb21-3fb3d0595c79)
+![tsssssss](https://github.com/user-attachments/assets/8e906305-29b7-4519-baf3-b247374bc5c8)
+
 
 </details>
 
