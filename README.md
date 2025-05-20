@@ -83,12 +83,12 @@ Ieșirea programului conține:
 | C2  | 3        | 0        | true      | Exception (IllegalArgumentException) | 
 | C3  | 2        | 10       | true      | 12.5                                 | 
 | C4  | 2        | 10       | false     | 9.5                                  | 
-| C5  | 7        | 15       | true      | 20                                   | 
-| C6  | 7        | 15       | false     | 15.2				       | 
-| C7  | 12       | 45       | true      | 36.25                                | 
-| C8  | 13       | 45       | false     | 29.45                                | 
-| C9  | 12       | 15       | true      | 32.5                                 | 
-| C10 | 12       | 15       | false     | 24.7                                 | 
+| C5  | 7        | 15       | true      | 17                                   | 
+| C6  | 7        | 15       | false     | 13.3				                         | 
+| C7  | 12       | 45       | true      | 33.75                                | 
+| C8  | 12       | 45       | false     | 25.65                                | 
+| C9  | 12       | 15       | true      | 30                                   | 
+| C10 | 12       | 15       | false     | 22.8                                 | 
 
 
 ---
@@ -439,12 +439,12 @@ Toți cei **5 mutanți** supraviețuitori provin din `ConditionalsBoundaryMutato
 
 ### 📌 Detalii Mutanți
 
-#### 1. `calculeazaCostLivrare` - linia 17
+#### 1. `calculeazaCostLivrare`
 
 * **Descriere:** modificare a pragului `greutate <= 5`
 * **Test suplimentar:** Adaugă un test pentru `greutate = 5`
 
-#### 2. `calculeazaCostLivrare` - linia 21
+#### 2. `calculeazaCostLivrare`
 
 * **Descriere:** modificare a pragului `distanta > 20`
 * **Test suplimentar:** Testează `distanta = 20` cu `greutate > 10`
@@ -452,24 +452,24 @@ Toți cei **5 mutanți** supraviețuitori provin din `ConditionalsBoundaryMutato
 * **Descriere:** modificare a pragului `greutate > 10`
 * **Test suplimentar:** Testează `greutate = 10` cu `distanta > 20`
 
-#### 3. `calculeazaCostLivrare` - linia 23
+#### 3. `calculeazaCostLivrare`
 
 * **Descriere:** modificare condiție `kmSuplimentari > 0`
 * **Test suplimentar:** Verifică dacă nu se adaugă cost când `kmSuplimentari = 0`
 
-#### 4. `clasificaLivrare` - linia 40
+#### 4. `clasificaLivrare`
 
 * **Descriere:** modificare a pragului `cost >= 150`
 * **Test suplimentar:** Testează `cost = 150`
 
-#### 5. `clasificaLivrare` - linia 41
+#### 5. `clasificaLivrare`
 
 * **Descriere:** modificare a pragului `cost >= 75`
 * **Test suplimentar:** Testează `cost = 75`
 
 * **Descriere:** modificare a pragului `cost < 150`
 
-#### 6. `estimeazaTimpLivrare` - linia 57
+#### 6. `estimeazaTimpLivrare`
 
 * **Descriere:** modificare condiție `timp < 1`
 * **Test suplimentar:** Verifică `timp = 1`
