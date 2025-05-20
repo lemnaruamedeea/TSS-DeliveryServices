@@ -394,20 +394,6 @@ Această analiză vizează testarea comportamentului serviciului de livrare în 
 </details>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <details>
 <summary> <b>📄 Detalii testare la nivel de instrucțiune </b> </summary>
 
@@ -717,6 +703,16 @@ Toți cei **5 mutanți** supraviețuitori provin din `ConditionalsBoundaryMutato
 * **Descriere:** modificare a pragului `greutate > 10`
 * **Test suplimentar:** Testează `greutate = 10` cu `distanta > 20`
 
+```
+@Test
+    void testDistantaPeste20GreutateFix10() {
+        Livrare livrare = new Livrare(10.0, 30.0, false);
+        double cost = serviciu.calculeazaCostLivrare(livrare);
+        // nu se adaugă cost suplimentar pentru distanță pentru că greutatea nu e >10
+        assertEquals(19.0, cost, 0.01);
+    }
+```
+
 #### 3. `calculeazaCostLivrare`
 
 * **Descriere:** modificare condiție `kmSuplimentari > 0`
@@ -727,12 +723,30 @@ Toți cei **5 mutanți** supraviețuitori provin din `ConditionalsBoundaryMutato
 * **Descriere:** modificare a pragului `cost >= 150`
 * **Test suplimentar:** Testează `cost = 150`
 
+```
+@Test
+    public void testClasificareCostExact150() {
+        Livrare livrare = new Livrare(60.0, 20.0, true); // Configurează să obții cost exact 150
+        double cost = serviciu.calculeazaCostLivrare(livrare);
+        assertEquals(150.0, cost, 0.01);
+        assertEquals("Scumpa", serviciu.clasificaLivrare(livrare));
+    }
+```
+
 #### 5. `clasificaLivrare`
 
 * **Descriere:** modificare a pragului `cost >= 75`
 * **Test suplimentar:** Testează `cost = 75`
 
-* **Descriere:** modificare a pragului `cost < 150`
+```
+@Test
+    public void testClasificareCostExact75() {
+        Livrare livrare = new Livrare(30.0, 10.0, true); // Configurează să obții cost 75
+        double cost = serviciu.calculeazaCostLivrare(livrare);
+        assertEquals(75.0, cost, 0.01);
+        assertEquals("Standard", serviciu.clasificaLivrare(livrare));
+    }
+```
 
 #### 6. `estimeazaTimpLivrare`
 
@@ -834,3 +848,166 @@ C7 ⇒ E4
 
 </details>
 
+<details> 
+  <summary> <b>🔄Raport AI </b> </summary>
+
+## 🎯 Scopul activității
+
+Scopul acestei activități a fost validarea automată a funcționalității aplicației `TSS-DeliveryServices` prin teste unitare dezvoltate în Java. Testele au fost scrise atât manual, de către echipa noastră, cât și cu sprijinul unui model AI (ChatGPT), pentru a obține o acoperire cât mai extinsă a codului și comportamentului aplicației.
+
+---
+
+## 📐 Clase de echivalență
+
+🔎 Prompt exemplu: *"Cum am putea împărți metoda `calculeazaCostLivrare` în clase de echivalență?"*
+
+### 🔍 Metoda: `calculeazaCostLivrare`
+
+| Clasa | Greutate | Distanță | Prioritar | Observații                            |
+| ----- | -------- | -------- | --------- | ------------------------------------- |
+| CE1   | ≤ 0      | orice    | orice     | Greutate invalidă                     |
+| CE2   | orice    | ≤ 0      | orice     | Distanță invalidă                     |
+| CE3   | ≤ 5      | ≤ 20     | false     | Cost de bază × 0.95                   |
+| CE4   | ≤ 5      | ≤ 20     | true      | Cost de bază × 1.25                   |
+| CE5   | > 5      | ≤ 20     | false     | Cost suplimentar greutate             |
+| CE6   | > 5      | ≤ 20     | true      | Cost suplimentar greutate + prioritar |
+| CE7   | > 10     | > 20     | false     | Cost suplimentar distanță + greutate  |
+| CE8   | > 10     | > 20     | true      | Cost complet + prioritar              |
+| CE9   | orice    | orice    | orice     | Cost plafonat la 200                  |
+
+---
+
+## ✅ Exemple de teste JUnit pe clase de echivalență
+
+```java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class ServiciuLivrareEquivalenceTest {
+    private final ServiciuLivrare serviciu = new ServiciuLivrare();
+
+    // CE1 - Greutate invalidă
+    @Test
+    void testGreutateInvalida() {
+        Livrare l = new Livrare(0, 10, false);
+        assertThrows(IllegalArgumentException.class, () -> serviciu.calculeazaCostLivrare(l));
+    }
+
+    // CE3 - Greutate ≤ 5, Distanță ≤ 20, Non-prioritar
+    @Test
+    void testCostBazaNonPrioritar() {
+        Livrare l = new Livrare(3, 10, false);
+        double cost = serviciu.calculeazaCostLivrare(l);
+        assertEquals(9.5, cost, 0.001);
+    }
+
+    // CE4 - Cost de bază + prioritar
+    @Test
+    void testCostBazaPrioritar() {
+        Livrare l = new Livrare(4, 15, true);
+        double cost = serviciu.calculeazaCostLivrare(l);
+        assertEquals(12.5, cost, 0.001);
+    }
+
+    // CE7 - Cost cu distanță suplimentară și greutate
+    @Test
+    void testCostCombinat() {
+        Livrare l = new Livrare(12, 40, false);
+        double cost = serviciu.calculeazaCostLivrare(l);
+        // 10 + (12-5)*2 + 3*1.5 = 10 + 14 + 4.5 = 28.5 * 0.95 = 27.075
+        assertEquals(27.075, cost, 0.001);
+    }
+}
+```
+
+📌 Comparând exemplele oferite de ChatGPT cu clasele identificate de echipă, am reușit să implementăm o gamă variată de teste care acoperă complet spațiul de echivalență al metodei `calculeazaCostLivrare`.
+
+---
+
+## 🧪 Teste de condiție și decizie
+
+🔎 Prompt exemplu: *"Poți să îmi dai niște exemple de teste de condiție/decizie?"*
+
+### 🔍 1. Acoperire pe condiții (Condition Coverage)
+
+Se testează fiecare sub-condiție dintr-un `if` logic:
+
+```java
+if (greutate <= 0 || distanta <= 0)
+```
+
+Trebuie să verificăm:
+
+* greutate ≤ 0 și distanță > 0 → true
+* greutate > 0 și distanță ≤ 0 → true
+* greutate > 0 și distanță > 0 → false
+
+```java
+@Test
+void testGreutateInvalida() {
+    Livrare livrare = new Livrare(0, 10, false);
+    assertThrows(IllegalArgumentException.class, () -> serviciu.calculeazaCostLivrare(livrare));
+}
+
+@Test
+void testDistantaInvalida() {
+    Livrare livrare = new Livrare(2, 0, true);
+    assertThrows(IllegalArgumentException.class, () -> serviciu.calculeazaCostLivrare(livrare));
+}
+
+@Test
+void testGreutateSiDistantaValide() {
+    Livrare livrare = new Livrare(2, 5, false);
+    double cost = serviciu.calculeazaCostLivrare(livrare);
+    assertTrue(cost > 0);
+}
+```
+
+### 🔍 2. Acoperire pe decizii (Decision Coverage)
+
+Se asigură că fiecare `if` e evaluat atât pe ramura true cât și pe ramura false.
+
+#### Exemplu: `if (distanta > 20 && greutate > 10)`
+
+* distanță ≤ 20 → fals
+* distanță > 20, greutate ≤ 10 → fals
+* distanță > 20, greutate > 10 → adevărat
+
+```java
+@Test
+void testDistantaSub20GreutateSub10() {
+    Livrare livrare = new Livrare(5, 15, false);
+    double cost = serviciu.calculeazaCostLivrare(livrare);
+    assertTrue(cost < 20);
+}
+
+@Test
+void testDistantaPeste20GreutateSub10() {
+    Livrare livrare = new Livrare(8, 30, false);
+    double cost = serviciu.calculeazaCostLivrare(livrare);
+    assertTrue(cost < 25);
+}
+
+@Test
+void testDistantaPeste20GreutatePeste10() {
+    Livrare livrare = new Livrare(12, 45, false);
+    double cost = serviciu.calculeazaCostLivrare(livrare);
+    assertEquals(25.65, cost, 0.01);
+}
+```
+
+📌 La fel ca în cazul claselor de echivalență, am combinat exemplele generate de AI cu scenarii gândite de echipă, pentru a obține o acoperire completă.
+
+---
+
+## 📊 Concluzii și beneficii
+
+✔️ Combinarea testării manuale cu generarea automată prin ChatGPT a condus la:
+
+* ✅ O acoperire structurală completă a codului: instrucțiune, decizie, condiție, circuite independente;
+* ✅ Detectarea unor posibile cazuri-limită;
+* ✅ Creșterea calității generale a codului și a robusteții aplicației;
+
+📌 Observăm că modelul AI oferă o excelentă bază teoretică și propuneri rapide, dar are nevoie de completări umane pentru a atinge exhaustivitatea testării.
+
+> Acest raport oferă o imagine de ansamblu asupra procesului de testare, subliniind avantajele colaborării om-AI în dezvoltarea de software de calitate.
