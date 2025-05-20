@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Default ignored files
 /.idea/shelf/
 /workspace.xml
@@ -9,11 +9,6 @@
 /out/
 /out/*
 
-# Optional: Ignore IntelliJ project files (if you don't want to share IDE settings)
-*.iml
-.idea/
-
-=======
 # IntelliJ project files
 .idea/
 *.iml
@@ -23,7 +18,3 @@ out/
 target/
 build/
 
-# OS-specific
-.DS_Store
-Thumbs.db
->>>>>>> main
