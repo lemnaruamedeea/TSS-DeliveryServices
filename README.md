@@ -40,6 +40,11 @@ Programul calculează:
 - CU 1 oră mai puțin dacă este prioritară
 - Timpul minim este de 1 oră
 
+
+## 📽️ Prezentare video
+
+👉 Vezi prezentarea video [AICI](https://youtu.be/zyChLN-exds)
+
 ---
 
 
@@ -772,7 +777,7 @@ Toți cei **5 mutanți** supraviețuitori provin din `ConditionalsBoundaryMutato
 </details>
 
 <details> 
-  <summary> <b>🔄Detalii despre circuite independente </b> </summary>
+  <summary> <b>🔄 Detalii despre circuite independente </b> </summary>
 
 ### Graful de flux de control - calculeazaCostLivrare
 N1: Start    
@@ -849,7 +854,7 @@ C7 ⇒ E4
 </details>
 
 <details> 
-  <summary> <b>🔄Raport AI </b> </summary>
+  <summary> <b>🤖 Raport AI </b> </summary>
 
 ## 🎯 Scopul activității
 
