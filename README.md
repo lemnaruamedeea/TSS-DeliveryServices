@@ -62,6 +62,8 @@ Programul calculează:
 | d        | D₁ = { d > 0 } | D₂ = { d ≤ 0 } |
 | p        | P₁ = { da, nu }   |               |
 
+
+
 ---
 
 ### 2. Domeniul de ieșiri:
@@ -89,6 +91,37 @@ Ieșirea programului conține:
 | C9  | 12       | 15       | true      | 30                                   | 
 | C10 | 12       | 15       | false     | 22.8                                 | 
 
+```
+ // C1: greutate ≤ 0
+    @Test
+    public void testGreutateZero() {
+        Livrare l = new Livrare(0, 10, false);
+        assertThrows(IllegalArgumentException.class, () -> serviciu.calculeazaCostLivrare(l));
+    }
+
+    // C2: distanta ≤ 0
+    @Test
+    public void testDistantaZero() {
+        Livrare l = new Livrare(3, 0, true);
+        assertThrows(IllegalArgumentException.class, () -> serviciu.calculeazaCostLivrare(l));
+    }
+
+    // C3: greutate mică, distanță mică, prioritar
+    @Test
+    public void testLivrareIeftinaPrioritara() {
+        Livrare l = new Livrare(2, 10, true);
+        double cost = serviciu.calculeazaCostLivrare(l);
+        assertEquals(12.5, cost, 0.01); // 10 * 1.25
+    }
+
+    // C4: greutate mică, distanță mică, neprioritar
+    @Test
+    public void testLivrareIeftinaNeprioritara() {
+        Livrare l = new Livrare(2, 10, false);
+        double cost = serviciu.calculeazaCostLivrare(l);
+        assertEquals(9.5, cost, 0.01); // 10 * 0.95
+    }
+```
 
 ---
 
@@ -99,7 +132,29 @@ Ieșirea programului conține:
 | C12 | 50       | 100      | false     | ≈ 104.5          | Standard              |
 | C13 | 100      | 200      | true      | > 200 (plafonat) | Scumpa                |
 
-   
+
+```
+ @Test
+    public void testClasificareIeftina() {
+        Livrare l = new Livrare(2, 10, false); // cost = 9.5
+        assertEquals("Ieftina", serviciu.clasificaLivrare(l));
+    }
+
+    @Test
+    public void testClasificareStandard() {
+        Livrare l = new Livrare(20, 30, false);
+        // costBaza = 10 + 30 + (int)(30/10)*1.5 = 10+30+4.5 = 44.5 * 0.95 ≈ 42.275
+        // asta e sub 75, deci nu e bun → trebuie să generăm un cost > 75
+        l = new Livrare(50, 100, false); // cost = 110 * 0.95 = 104.5
+        assertEquals("Standard", serviciu.clasificaLivrare(l));
+    }
+
+    @Test
+    public void testClasificareScumpa() {
+        Livrare l = new Livrare(100, 200, true); // cost depășește plafonul 200
+        assertEquals("Scumpa", serviciu.clasificaLivrare(l));
+    }
+```
 
 ---
 
@@ -111,6 +166,32 @@ Ieșirea programului conține:
 | C16 | 2.5      | 10       | false     | false    |
 | C17 | 5        | 10       | true      | false    |
 
+
+```
+ @Test
+    public void testEligibilReducere() {
+        Livrare l = new Livrare(1.5, 10, false);
+        assertTrue(serviciu.esteEligibilaReducere(l));
+    }
+
+    @Test
+    public void testNuEsteEligibilPrioritara() {
+        Livrare l = new Livrare(1.5, 10, true);
+        assertFalse(serviciu.esteEligibilaReducere(l));
+    }
+
+    @Test
+    public void testNuEsteEligibilGreutateMare() {
+        Livrare l = new Livrare(2.5, 10, false);
+        assertFalse(serviciu.esteEligibilaReducere(l));
+    }
+
+    @Test
+    public void testNuEsteEligibilAmbele() {
+        Livrare l = new Livrare(5, 10, true);
+        assertFalse(serviciu.esteEligibilaReducere(l));
+    }
+```
 
 ---
 
@@ -124,7 +205,25 @@ Ieșirea programului conține:
 | C22 | 2        | 0.1      | false     | 1        |
 
 
+```
+   @Test
+    public void testTimpLivrareMicNeprioritar() {
+        Livrare l = new Livrare(2, 5, false);
+        assertEquals(1, serviciu.estimeazaTimpLivrare(l));
+    }
 
+    @Test
+    public void testTimpLivrareMicPrioritar() {
+        Livrare l = new Livrare(2, 5, true);
+        assertEquals(1, serviciu.estimeazaTimpLivrare(l)); // nu scade sub 1
+    }
+
+    @Test
+    public void testTimpLivrareMediuNeprioritar() {
+        Livrare l = new Livrare(2, 25, false);
+        assertEquals(3, serviciu.estimeazaTimpLivrare(l)); // 25/10 = 2.5 -> int = 2 + 1 = 3
+    }
+```
 
 </details>
 
@@ -162,6 +261,35 @@ Această analiză vizează testarea comportamentului serviciului de livrare în 
 | 11        | Cost prioritar                    | 5     | 10  | true  | 12.5                      |
 | 12         | Cost non-prioritar                | 5     | 10  | false | 9.5                       |
 
+```
+ @Test
+    void testGreutateLaZero() {
+        Livrare livrare = new Livrare(0, 10, false);
+        assertThrows(IllegalArgumentException.class, () -> serviciu.calculeazaCostLivrare(livrare));
+    }
+
+    @Test
+    void testGreutateMinimaValida() {
+        Livrare livrare = new Livrare(0.1, 10, false);
+        double cost = serviciu.calculeazaCostLivrare(livrare);
+        assertTrue(cost > 0);
+    }
+
+    @Test
+    void testGreutateLimita5() {
+        Livrare livrare = new Livrare(5, 10, false);
+        double cost = serviciu.calculeazaCostLivrare(livrare);
+        assertEquals(9.5, cost, 0.01);
+    }
+
+    @Test
+    void testGreutatePeste5() {
+        Livrare livrare = new Livrare(5.01, 10, false);
+        double cost = serviciu.calculeazaCostLivrare(livrare);
+        assertEquals(9.52, cost, 0.01); // 10 + 0.02 * 0.95
+    }
+```
+
 ---
 
 ### 🏷️ Teste pentru `clasificaLivrare`
@@ -171,6 +299,28 @@ Această analiză vizează testarea comportamentului serviciului de livrare în 
 | 1      | Cost scăzut                       | 1     | 5   | false | Ieftina                   |
 | 2 | Cost spre 75                  | 10    | 40  | false | Ieftina                   |
 | 3| Cost foarte mare                  | 100   | 200 | true  | Scumpa                    |
+
+
+```
+ @Test
+    void testClasificareIeftina() {
+        Livrare livrare = new Livrare(1, 5, false);
+        assertEquals("Ieftina", serviciu.clasificaLivrare(livrare));
+    }
+
+    @Test
+    void testClasificareStandardLaLimita() {
+        Livrare livrare = new Livrare(10, 40, false); // costul trece de 75
+        assertEquals("Ieftina", serviciu.clasificaLivrare(livrare));
+    }
+
+    @Test
+    void testClasificareScumpaPeste150() {
+        Livrare livrare = new Livrare(100, 200, true); // fortam cost mare
+        assertEquals("Scumpa", serviciu.clasificaLivrare(livrare));
+    }
+
+```
 
 ---
 
@@ -182,6 +332,27 @@ Această analiză vizează testarea comportamentului serviciului de livrare în 
 | 2     | 1.99  | true  | false    |
 | 3   | 2.0   | false | false    |
 
+
+```
+  @Test
+    void testReducereEligibil_Sub2kg_NonPrioritar() {
+        Livrare livrare = new Livrare(1.99, 10, false);
+        assertTrue(serviciu.esteEligibilaReducere(livrare));
+    }
+
+    @Test
+    void testReducereNeeligibil_Prioritar() {
+        Livrare livrare = new Livrare(1.99, 10, true);
+        assertFalse(serviciu.esteEligibilaReducere(livrare));
+    }
+
+    @Test
+    void testReducereNeeligibil_GreutateFix2kg() {
+        Livrare livrare = new Livrare(2.0, 10, false);
+        assertFalse(serviciu.esteEligibilaReducere(livrare));
+    }
+
+```
 ---
 
 ### ⏱️ Teste pentru `estimeazaTimpLivrare`
@@ -193,8 +364,34 @@ Această analiză vizează testarea comportamentului serviciului de livrare în 
 | 3| 10    | true  | 1        |
 | 4  | 0.5   | true  | 1        |
 
-</details>
 
+```
+ @Test
+    void testTimpLivrare_Sub10km() {
+        Livrare livrare = new Livrare(1, 9.9, false);
+        assertEquals(1, serviciu.estimeazaTimpLivrare(livrare));
+    }
+
+    @Test
+    void testTimpLivrare_La10km() {
+        Livrare livrare = new Livrare(1, 10, false);
+        assertEquals(2, serviciu.estimeazaTimpLivrare(livrare));
+    }
+
+    @Test
+    void testTimpLivrare_Prioritara() {
+        Livrare livrare = new Livrare(1, 10, true);
+        assertEquals(1, serviciu.estimeazaTimpLivrare(livrare));
+    }
+
+    @Test
+    void testTimpLivrare_Minim1h() {
+        Livrare livrare = new Livrare(1, 0.5, true); // => timp = 1 - 1 => 0 -> returnează 1
+        assertEquals(1, serviciu.estimeazaTimpLivrare(livrare));
+    }
+```
+
+</details>
 
 
 
