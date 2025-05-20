@@ -19,10 +19,9 @@ Programul calculează:
 1. Costul livrării, ținând cont de greutate, distanță și prioritate, cu un plafon maxim aplicat, după cum urmează:
 
 - Cost de bază: 10.0 lei
-- 2 lei pentru fiecare kg peste 5 kg
-- 1.5 lei pentru fiecare 10 km peste 20 km (numai dacă greutatea > 10 kg)
-- 1.25 dacă este livrare prioritară
-- 0.95 dacă nu este livrare prioritară
+- înmulțim cu 2 lei pentru fiecare kg peste 5 kg
+- adunăm 1.5 lei pentru fiecare 10 km peste 20 km (numai dacă greutatea > 10 kg)
+- înmulțim cu 1.25 dacă este livrare prioritară sau cu 0.95 dacă nu este livrare prioritară
 - Plafon maxim: 200 lei
 
 2. Clasificarea costului în: „Ieftină”, „Standard” sau „Scumpă”:
