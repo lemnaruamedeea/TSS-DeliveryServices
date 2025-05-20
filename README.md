@@ -2,9 +2,11 @@
 
 TSS-DeliveryServices este o aplicație Java dezvoltată în contextul disciplinei Testarea Sistemelor Software. Aceasta simulează un sistem de livrări prin modelarea și evaluarea caracteristicilor unei livrări, precum costul, timpul estimat și eligibilitatea pentru reduceri. Scopul proiectului este de a oferi un model simplu al unui serviciu real, iar pe de altă parte, servește ca punct de plecare pentru aplicarea diverselor tehnici de testare unitară, testare structurală și testare funcțională.
 
-<details>
-  <summary> <b>📋 Enunțul și clasele de echivalență</summary></b> 
+<details> 
+  
+  <summary><b>📚 Enunțul problemei</summary></b> 
 
+<br>     
 Se testează un program care gestionează livrări pe baza unor caracteristici introduse de utilizator.  
 Mai precis, pentru o livrare, utilizatorul introduce:
 
@@ -14,12 +16,38 @@ Mai precis, pentru o livrare, utilizatorul introduce:
 
 Programul calculează:
 
-- Costul livrării, ținând cont de greutate, distanță și prioritate, cu un plafon maxim aplicat;
-- Clasificarea costului în: „Ieftină”, „Standard” sau „Scumpă”;
-- Eligibilitatea pentru o reducere, disponibilă doar pentru livrările ușoare și neprioritare;
-- Timpul estimat de livrare, exprimat în ore, influențat de distanță și prioritate.
+1. Costul livrării, ținând cont de greutate, distanță și prioritate, cu un plafon maxim aplicat, după cum urmează:
+
+- Cost de bază: 10.0 lei
+- 2 lei pentru fiecare kg peste 5 kg
+- 1.5 lei pentru fiecare 10 km peste 20 km (numai dacă greutatea > 10 kg)
+- 1.25 dacă este livrare prioritară
+- 0.95 dacă nu este livrare prioritară
+- Plafon maxim: 200 lei
+
+2. Clasificarea costului în: „Ieftină”, „Standard” sau „Scumpă”:
+
+- "Scumpă" dacă cost ≥ 150
+- "Standard" dacă 75 ≤ cost < 150
+- "Ieftină" dacă cost < 75
+
+3. Eligibilitatea pentru o reducere, disponibilă doar pentru livrările ușoare și neprioritare;
+
+- Este eligibilă pentru reducere doar dacă: greutate < 2 kg și livrarea NU este prioritară
+
+4. Timpul estimat de livrare, exprimat în ore, influențat de distanță și prioritate.
+
+- Timp de bază: ⌊distanta / 10⌋ + 1
+- CU 1 oră mai puțin dacă este prioritară
+- Timpul minim este de 1 oră
 
 ---
+
+
+</details>
+
+<details>
+  <summary> <b>📋 Clasele de echivalență</summary></b> 
 
 ### 1. Domeniul de intrări:
 
@@ -33,7 +61,7 @@ Programul calculează:
 |----------|---------------|----------------|
 | g        | G₁ = { g > 0 } | G₂ = { g ≤ 0 } |
 | d        | D₁ = { d > 0 } | D₂ = { d ≤ 0 } |
-| p        | P₁ = { da }   | P₂ = { nu }    |
+| p        | P₁ = { da, nu }   |               |
 
 ---
 
