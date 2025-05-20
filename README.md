@@ -515,6 +515,24 @@ Testele din clasa `TesteInstructiune` acoperă:
 | I16 | Timp estimat minim 1 zi (`Math.max(...)`)                                     | Protecție minim     | `testEstimeazaTimp_minim1`, `testEstimeazaTimpLivrare_Minim1` | Returnează minim 1 zi                                         |
 | I17 | `return timp;` din estimare timp                                              | Returnare timp      | Toate testele de estimare timp                    | Returnează timpul estimat                                    |
 
+
+```
+// test pentru clasificare livrare ieftina
+    @Test
+    void testClasificare_Ieftina() {
+        Livrare livrare = new Livrare(2.0, 10.0, false);
+        assertEquals("Ieftina", serviciu.clasificaLivrare(livrare));
+    }
+
+    // test pentru reducere eligibila (livrare usoara si non-prioritara)
+    @Test
+    void testReducere_eligibil() {
+        Livrare livrare = new Livrare(1.0, 5.0, false);
+        assertTrue(serviciu.esteEligibilaReducere(livrare));
+    }
+```
+
+
 </details>
 
 <details>
@@ -555,6 +573,34 @@ Verificăm că fiecare **ramură** din structura de control (`if`/`else`, `throw
 | D5  | Aplică -5% dacă neprioritar                        | else                | C₄, C₆, C₈, C₁₀              | testLivrareNonPrioritara()   | Cost cu 5% mai mic            |
 | D6  | Clasificare „Ieftină”                              | decizie clasificare | —                            | testCostLivrareIeftina()     | Etichetă: Ieftină             |
 
+
+```
+// test pentru livrare cu prioritate
+    @Test
+    public void testLivrarePrioritara() {
+        Livrare livrare = new Livrare(12.0, 30.0, true);
+        double cost = serviciu.calculeazaCostLivrare(livrare);
+        assertTrue(cost > 10); // costul ar trebui să fie crescut cu 20%
+    }
+
+    // test pentru livrare non-prioritară (reducerea de 5%)
+    @Test
+    public void testLivrareNonPrioritara() {
+        Livrare livrare = new Livrare(12.0, 30.0, false);
+        double cost = serviciu.calculeazaCostLivrare(livrare);
+        assertTrue(cost < 200); // ne asiguram ca este mai mic decât un prag
+    }
+
+    // test pentru declanșarea for-ului cu greutate > 10 și distanta > 20
+    @Test
+    public void testDistantaSiGreutateMaiMari() {
+        Livrare livrare = new Livrare(15.0, 25.0, false);
+        double cost = serviciu.calculeazaCostLivrare(livrare);
+        assertTrue(cost > 10); // bucla for ar trebui sa crească costul
+    }
+```
+
+
 </details>
 
 
@@ -593,6 +639,29 @@ Verificăm că fiecare **condiție individuală** (ex: `greutate <= 0`, `distant
 | C4  | `distanta > 20`         | limită pozitivă      | D₁                | (5, 25, false)       | Cost suplimentar                          |
 | C5  | `prioritar == true`     | bifurcare            | P₁                | (8, 30, true)        | Cost +20%                                 |
 | C6  | `prioritar == false`    | bifurcare            | P₂                | (8, 30, false)       | Cost -5%                                  |
+
+
+```
+ // Testăm excepție pentru greutate negativa
+    @Test
+    public void testGreutateNegativa() {
+        Livrare livrare = new Livrare(-1.0, 10.0, false);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            serviciu.calculeazaCostLivrare(livrare);
+        });
+        assertEquals("Greutatea si distanta trebuie sa fie pozitive.", exception.getMessage());
+    }
+
+    // Testăm excepție pentru distanță negativa
+    @Test
+    public void testDistantaNegativa() {
+        Livrare livrare = new Livrare(5.0, -10.0, false);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            serviciu.calculeazaCostLivrare(livrare);
+        });
+        assertEquals("Greutatea si distanta trebuie sa fie pozitive.", exception.getMessage());
+    }
+```
 
 </details>
 
