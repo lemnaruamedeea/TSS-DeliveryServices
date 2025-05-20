@@ -511,14 +511,23 @@ N13: else: costBaza *= 0.95
 N14: Return Math.min(costBaza, 200)   
 N15: End     
  
-e =muchii = 16 
-n =noduri= 15     => V(G) = 16 - 15 + 2 = 3  
+McCabe e - n + 2 = 5
+Muchii(e) = 18 
+Noduri(n) = 15     
+
  
 ## Circuite independente:  
   
-N1 → N2(false) → N4 → N5(false) → N7(false) → N11(true) → N12 → N14  
-N1 → N2(false) → N4 → N5(true) → N6 → N7(true) → N8 → N9(true) → N10 → N11(false) → N13 → N14   
-N1 → N2(true) → N3    
+C1: 
+N1->N2(true)->N3(exceptie input invalid)
+C2:
+N1->N2(false)->N4 ->N5(false)->N7(false) -> N11(true) ->N12 ->N14 ->N15
+C3:
+N1 -> N2(false) -> N4 -> N5(true) -> N6 -> N7(false) ->N11(false) -> N13 -> N14 -> N15
+C4:
+N1 -> N2 -> N4 -> N5(true) -> N6 -> N7 -> N8 -> N9(true) -> N10 -> N11(true) -> N12 -> N14 -> N15
+C5:
+N1 -> N2 -> N4 -> N5(true) -> N6 -> N7 -> N8 -> N9(false) -> N11(false) -> N13 -> N14 -> N15 
  
   
 ### Cauze:  
@@ -538,13 +547,15 @@ E4: costBaza *= 1.25
 E5: costBaza *= 0.95   
 E6: return min(cost, 200)  
     
-| C1 | C2 | C3 | C4 | C5 | C6 | C7 | E1 | E2 | E3 | E4 | E5 | E6 | 
-| -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |   
-| 1  | 0  | -  | -  | -  | -  | -  | 1  | 0  | 0  | 0  | 0  | 0  |    
-| 0  | 1  | -  | -  | -  | -  | -  | 1  | 0  | 0  | 0  | 0  | 0  |  
-| 0  | 0  | 0  | 0  | 0  | 0  | 1  | 0  | 0  | 0  | 1  | 0  | 1  |  
-| 0  | 0  | 1  | 1  | 1  | 1  | 0  | 0  | 1  | 1  | 0  | 1  | 1  |  
-  
+
+| C1 | C2 | C3 | C4 | C5 | C6 | C7 | E1 | E2 | E3 | E4 | E5 | E6 | Test             |
+|----|----|----|----|----|----|----|----|----|----|----|----|----|------------------|
+| 1  | 0  | -  | -  | -  | -  | -  | 1  | 0  | 0  | 0  | 0  | 0  | InputInvalid     |
+| 0  | 0  | 0  | 0  | 0  | 0  | 1  | 0  | 0  | 0  | 1  | 0  | 1  | PrioritarSimplu  |
+| 0  | 0  | 1  | 0  | 0  | 0  | 0  | 0  | 1  | 0  | 0  | 1  | 1  | GreutateMareNonP |
+| 0  | 0  | 1  | 1  | 1  | 1  | 1  | 0  | 1  | 1  | 1  | 0  | 1  | ForLoopP         |
+| 0  | 0  | 1  | 1  | 1  | 0  | 0  | 0  | 1  | 0  | 0  | 1  | 1  | FaraLoop1Step    |
+
 ### Relații:  
 C1 ∨ C2 ⇒ E1   
 C3 ⇒ E2   
