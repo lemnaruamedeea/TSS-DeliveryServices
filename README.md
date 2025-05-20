@@ -90,6 +90,7 @@ Ieșirea programului conține:
 | C9  | 12       | 15       | true      | 32.5                                 | 
 | C10 | 12       | 15       | false     | 24.7                                 | 
 
+
 ---
 
 ### Testele pentru `clasificaLivrare`
@@ -98,6 +99,8 @@ Ieșirea programului conține:
 | C11 | 2        | 10       | false     | 9.5              | Ieftina               |
 | C12 | 50       | 100      | false     | ≈ 104.5          | Standard              |
 | C13 | 100      | 200      | true      | > 200 (plafonat) | Scumpa                |
+
+   
 
 ---
 
@@ -109,6 +112,7 @@ Ieșirea programului conține:
 | C16 | 2.5      | 10       | false     | false    |
 | C17 | 5        | 10       | true      | false    |
 
+
 ---
 
 ### Testele pentru `estimeazaTimpLivrare`
@@ -119,6 +123,9 @@ Ieșirea programului conține:
 | C20 | 2        | 25       | false     | 3        |
 | C21 | 2        | 25       | true      | 2        |
 | C22 | 2        | 0.1      | false     | 1        |
+
+
+
 
 </details>
 
